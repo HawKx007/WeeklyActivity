@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}GameRevs{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <style>
         body {
             margin: 0;
@@ -31,16 +31,27 @@
         .main-content {
             margin-left: 200px;
             width: calc(100% - 200px);
+            padding-bottom: 60px; /* To prevent content behind footer */
         }
         .banner {
             width: 100%;
             height: 250px;
-            background-image: url("{% static 'images/banner.jpg' %}");
+            background-image: url("{% static 'images/banner.jpeg' %}");
             background-size: cover;
             background-position: center;
         }
         .content {
             padding: 20px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 200px;
+            width: calc(100% - 200px);
         }
     </style>
 </head>
@@ -49,15 +60,14 @@
     <!-- Side Navigation Bar -->
     <div class="sidebar">
         <h2 style="text-align:center;">Menu</h2>
-        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'gamereviewapp:gameList' %}">Home</a>
         <a href="#">Games</a>
         <a href="#">Reviews</a>
-        <a href="#">Tags</a>
+        <a href="{% url 'gamereviewapp:tag_list' %}">Tags</a>
     </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
-
         <!-- Banner Image -->
         <div class="banner"></div>
 
@@ -65,12 +75,16 @@
         <div class="content">
             <h1>{% block page_title %}Welcome to Game Reviews{% endblock %}</h1>
 
-            <!-- Page Content Block -->
+            <!-- Dynamic Page Content -->
             {% block content %}
-            <!-- Content goes here -->
             {% endblock %}
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 GameRevs. All rights reserved.
+    </footer>
 
 </body>
 </html>

@@ -1,0 +1,31 @@
+{% extends "gamereview/base.html" %}
+
+{% block page_title %}Review for {{ game.title }}{% endblock %}
+
+{% block content %}
+    <p><a href="{% url 'gamereviewapp:gameList' %}">← Back to Game List</a></p>
+
+    <h2>{{ game.title }}</h2>
+
+    <p><strong>Developer:</strong> {{ game.developer }}</p>
+    <p><strong>Platform:</strong> {{ game.platform }}</p>
+
+    <p><strong>Tags:</strong>
+        {% for tag in game.label_tags.all %}
+            {{ tag.label }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            No tags available.
+        {% endfor %}
+    </p>
+
+    <hr>
+
+    <h3>Reviews:</h3>
+    <ul>
+        {% for review_item in game.review_set.all %}
+            <li>{{ review_item.review }} ({{ review_item.date|date:"F d, Y" }})</li>
+        {% empty %}
+            <li>No reviews yet for this game.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

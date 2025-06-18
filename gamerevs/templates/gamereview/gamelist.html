@@ -1,0 +1,15 @@
+{% extends "gamereview/base.html" %}
+
+{% block page_title %}Game List{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for game in games %}
+        <li>
+            <a href="{% url 'gamereviewapp:review' game.slug %}">{{ game.title }}</a>
+        </li>
+    {% empty %}
+        <li>No games available.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
