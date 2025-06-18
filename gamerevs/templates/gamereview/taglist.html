@@ -1,0 +1,14 @@
+{% extends "gamereview/base.html" %}
+
+{% block page_title %}Tags{% endblock %}
+
+{% block content %}
+    <h2>Available Tags</h2>
+    <ul>
+        {% for tag in tags %}
+            <li>{{ tag.label }}</li>
+        {% empty %}
+            <li>No tags available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
